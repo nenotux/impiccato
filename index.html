@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>🎮 Gioco dell'Impiccato</title>
+    <link rel="stylesheet" href="style.css?v=1767954180">
+</head>
+<body>
+    <!-- Sfondo animato -->
+    <div class="background">
+        <div class="cloud cloud1">☁️</div>
+        <div class="cloud cloud2">☁️</div>
+        <div class="cloud cloud3">☁️</div>
+        <div class="star star1">⭐</div>
+        <div class="star star2">⭐</div>
+        <div class="star star3">⭐</div>
+        <div class="star star4">⭐</div>
+    </div>
+
+    <div class="container">
+        <!-- Schermata di selezione modalità -->
+        <div id="modeSelection" class="screen active">
+            <h1 class="title">🎮 Gioco dell'Impiccato</h1>
+            <p class="subtitle">Scegli come giocare!</p>
+            
+            <div class="mode-buttons">
+                <button class="mode-btn" onclick="selectMode('single')">
+                    <span class="icon">🤖</span>
+                    <span class="text">Gioca contro il Computer</span>
+                </button>
+                <button class="mode-btn" onclick="selectMode('duo')">
+                    <span class="icon">👥</span>
+                    <span class="text">Gioca in Due</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Schermata inserimento parola (modalità 2 giocatori) -->
+        <div id="wordInput" class="screen">
+            <h2 class="title">Giocatore 1</h2>
+            <p class="subtitle">Inserisci una parola segreta (3-6 lettere)</p>
+            
+            <input type="text" 
+                   id="secretWord" 
+                   class="word-input" 
+                   placeholder="Scrivi la parola..." 
+                   maxlength="6"
+                   autocomplete="off">
+            
+            <button class="btn-primary" onclick="startGame()">Inizia il Gioco! 🚀</button>
+            <button class="btn-secondary" onclick="backToMode()">⬅️ Indietro</button>
+        </div>
+
+        <!-- Schermata di gioco -->
+        <div id="gameScreen" class="screen">
+            <div class="game-header">
+                <div class="score-info">
+                    <span class="errors">❌ Errori: <span id="errors">0</span>/8</span>
+                    <button class="btn-small" onclick="restartGame()">🔄 Nuova Partita</button>
+                </div>
+            </div>
+
+            <!-- Messaggio di suggerimento -->
+            <div id="hintMessage" class="hint-message hidden"></div>
+
+            <!-- Area del disegno dell'impiccato -->
+            <div class="hangman-container">
+                <svg id="hangmanSvg" viewBox="0 0 200 250" class="hangman-svg">
+                    <!-- Base -->
+                    <line x1="10" y1="230" x2="150" y2="230" stroke="#8B4513" stroke-width="4" class="part" id="base"/>
+                    <!-- Palo verticale -->
+                    <line x1="50" y1="230" x2="50" y2="20" stroke="#8B4513" stroke-width="4" class="part" id="pole"/>
+                    <!-- Palo orizzontale -->
+                    <line x1="50" y1="20" x2="130" y2="20" stroke="#8B4513" stroke-width="4" class="part" id="beam"/>
+                    <!-- Corda -->
+                    <line x1="130" y1="20" x2="130" y2="50" stroke="#654321" stroke-width="2" class="part" id="rope"/>
+                    
+                    <!-- Testa (errore 1) -->
+                    <circle cx="130" cy="70" r="20" stroke="#FF6B6B" stroke-width="3" fill="#FFE5E5" class="part hidden" id="head"/>
+                    <!-- Occhi tristi -->
+                    <circle cx="123" cy="67" r="2" fill="#FF6B6B" class="part hidden" id="leftEye"/>
+                    <circle cx="137" cy="67" r="2" fill="#FF6B6B" class="part hidden" id="rightEye"/>
+                    <!-- Bocca triste -->
+                    <path d="M 120 78 Q 130 75 140 78" stroke="#FF6B6B" stroke-width="2" fill="none" class="part hidden" id="mouth"/>
+                    
+                    <!-- Corpo (errore 2) -->
+                    <line x1="130" y1="90" x2="130" y2="150" stroke="#FF6B6B" stroke-width="3" class="part hidden" id="body"/>
+                    
+                    <!-- Braccio sinistro (errore 3) -->
+                    <line x1="130" y1="110" x2="100" y2="130" stroke="#FF6B6B" stroke-width="3" class="part hidden" id="leftArm"/>
+                    
+                    <!-- Braccio destro (errore 4) -->
+                    <line x1="130" y1="110" x2="160" y2="130" stroke="#FF6B6B" stroke-width="3" class="part hidden" id="rightArm"/>
+                    
+                    <!-- Gamba sinistra (errore 5) -->
+                    <line x1="130" y1="150" x2="110" y2="190" stroke="#FF6B6B" stroke-width="3" class="part hidden" id="leftLeg"/>
+                    
+                    <!-- Gamba destra (errore 6) -->
+                    <line x1="130" y1="150" x2="150" y2="190" stroke="#FF6B6B" stroke-width="3" class="part hidden" id="rightLeg"/>
+                </svg>
+            </div>
+
+            <!-- Parola da indovinare -->
+            <div id="wordDisplay" class="word-display"></div>
+
+            <!-- Tastiera virtuale -->
+            <div id="keyboard" class="keyboard"></div>
+
+            <!-- Messaggio di vittoria/sconfitta -->
+            <div id="gameMessage" class="game-message hidden"></div>
+        </div>
+    </div>
+
+    <script src="game.js?v=1767954180"></script>
+</body>
+</html>
