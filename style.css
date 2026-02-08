@@ -286,6 +286,8 @@ body {
     gap: 10px;
     margin: 30px 0;
     min-height: 60px;
+    max-width: 100%;
+    padding: 0 10px;
 }
 
 .letter-box {
@@ -470,6 +472,7 @@ body {
     .keyboard-row { gap: 5px; }
     .key { width: 50px; height: 50px; font-size: 1.1rem; }
     .hint-message { font-size: 1rem; padding: 12px 20px; }
+    .word-display { gap: 8px; }
 }
 
 @media (max-width: 480px) {
@@ -477,11 +480,18 @@ body {
     .title { font-size: 1.8rem; }
     .mode-btn { padding: 20px; font-size: 1rem; flex-direction: column; }
     .screen { padding: 25px 15px; border-radius: 20px; }
-    .letter-box { width: 35px; height: 45px; font-size: 1.3rem; }
+    .letter-box { width: 32px; height: 42px; font-size: 1.2rem; gap: 6px; }
     .keyboard { max-width: 100%; }
     .keyboard-row { gap: 4px; }
     .key { width: 42px; height: 48px; font-size: 1rem; }
     .game-message { padding: 30px 40px; }
     .game-message h2 { font-size: 2rem; }
     .hint-message { font-size: 0.9rem; padding: 10px 15px; }
+    .word-display { gap: 5px; padding: 0 5px; }
+}
+
+/* Adattamento per parole molto lunghe */
+@media (max-width: 380px) {
+    .letter-box { width: 28px; height: 38px; font-size: 1rem; }
+    .word-display { gap: 4px; }
 }

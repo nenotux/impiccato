@@ -8,16 +8,39 @@ const maxWrongs = 8;
 let gameActive = false;
 let hintsGiven = 0;
 
-// Lista parole MOLTO SEMPLICI per bambini di 6 anni (3-6 lettere)
+// Lista parole per bambini - varie lunghezze (3-12 lettere)
 const wordLists = {
     facile: [
-        'MAMMA', 'PAPA', 'CASA', 'SOLE', 'LUNA', 'MARE',
-        'CANE', 'GATTO', 'PALLA', 'LATTE', 'PANE', 'ACQUA',
-        'FIORE', 'CUORE', 'NONNA', 'NONNO', 'BIMBO', 'GIOCO',
-        'PIZZA', 'PASTA', 'MELA', 'PERA', 'TORTA', 'GELATO',
-        'LIBRO', 'SCUOLA', 'AMICO', 'FESTA', 'REGALO', 'ROSSO',
-        'VERDE', 'GIALLO', 'BLU', 'NERO', 'FUOCO', 'ARIA',
-        'TERRA', 'CIELO', 'STELLA', 'NUVOLA', 'PIOGGIA', 'VENTO'
+        // Parole corte (3-4 lettere)
+        'MAMMA', 'PAPA', 'CASA', 'SOLE', 'LUNA', 'MARE', 'CANE', 'GATTO',
+        'PANE', 'MELA', 'PERA', 'NONNA', 'NONNO', 'ROSA', 'ORSO', 'LAGO',
+        'NEVE', 'VOLO', 'BACIO', 'RISO', 'SALE', 'LUCE', 'VOCE', 'PACE',
+        
+        // Parole medie (5-6 lettere)
+        'PALLA', 'LATTE', 'ACQUA', 'FIORE', 'CUORE', 'BIMBO', 'GIOCO',
+        'PIZZA', 'PASTA', 'TORTA', 'GELATO', 'LIBRO', 'SCUOLA', 'AMICO',
+        'FESTA', 'REGALO', 'ROSSO', 'VERDE', 'GIALLO', 'NERO', 'FUOCO',
+        'ARIA', 'TERRA', 'CIELO', 'STELLA', 'NUVOLA', 'PIOGGIA', 'VENTO',
+        'BOSCO', 'MONTE', 'FIUME', 'PONTE', 'STRADA', 'TRENO', 'AEREO',
+        'BARCA', 'BICI', 'CAVALLO', 'MUCCA', 'PECORA', 'FARFALLA', 'UCCELLO',
+        'PESCE', 'BALENA', 'DELFINO',
+        
+        // Parole più lunghe (7-10 lettere)
+        'BAMBINO', 'BAMBINA', 'FRATELLO', 'SORELLA', 'FAMIGLIA', 'MACCHINA',
+        'COMPUTER', 'CONIGLIO', 'TARTARUGA', 'FRIGORIFERO', 'BICICLETTA',
+        'PRIMAVERA', 'AUTUNNO', 'INVERNO', 'ARCOBALENO', 'DINOSAURO',
+        'COCCINELLA', 'GIRASOLE', 'MARGHERITA', 'CIOCCOLATO', 'CARAMELLA',
+        'PALLONCINO', 'GIOCATTOLO', 'PASTICCINO', 'PANETTERIA', 'BIBLIOTECA',
+        'RISTORANTE', 'OSPEDALE', 'MONTAGNA', 'CAMPAGNA', 'SPIAGGIA',
+        'GIARDINO', 'QUADERNO', 'MATITA', 'DISEGNO', 'PITTURA',
+        'MUSICA', 'CANZONE', 'CHITARRA', 'PIANOFORTE', 'TAMBURO',
+        'CALCIO', 'PALLAVOLO', 'NUOTO', 'BALLO', 'CORSA',
+        'ELEFANTE', 'GIRAFFA', 'LEONE', 'TIGRE', 'PINGUINO', 'CANGURO',
+        'ASTRONAUTA', 'POMPIERE', 'DOTTORE', 'MAESTRO', 'POLIZIOTTO',
+        
+        // Parole molto lunghe (11-12 lettere)
+        'SUPERMERCATO', 'TELEVISIONE', 'AUTOMOBILE', 'COMPLEANNO',
+        'LAVASTOVIGLIE'
     ]
 };
 
@@ -112,14 +135,14 @@ function selectMode(mode) {
 }
 
 function getRandomWord() {
-    const allWords = wordLists.facile.filter(word => word.length <= 6);
+    // Nessun limite di lunghezza - tutte le parole disponibili
+    const allWords = wordLists.facile;
     return allWords[Math.floor(Math.random() * allWords.length)];
 }
 
 function startGame() {
     const input = document.getElementById('secretWord').value.toUpperCase().trim();
-    if (input.length < 3) { alert('La parola deve essere di almeno 3 lettere!'); return; }
-    if (input.length > 6) { alert('La parola può essere al massimo di 6 lettere!'); return; }
+    if (input.length < 2) { alert('La parola deve essere di almeno 2 lettere!'); return; }
     if (!/^[A-ZÀÈÉÌÒÙ]+$/.test(input)) { alert('La parola deve contenere solo lettere!'); return; }
     currentWord = input;
     initGame();
